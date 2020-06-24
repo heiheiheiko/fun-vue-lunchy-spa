@@ -18,7 +18,17 @@ const config = {
 const localAxios = axios.create(config);
 
 localAxios.interceptors.request.use(
-  (config) => config, // Do something before request is sent
+  (config) => {
+    const authDataString = localStorage.getItem('authData');
+    if (!authDataString) { return config; }
+
+    const authData = JSON.parse(authDataString);
+    config.headers = {
+      Authorization: `Bearer ${authData.access_token}`,
+    };
+
+    return config;
+  }, // Do something before request is sent
   (error) => Promise.reject(error), // Do something with request error
 );
 
