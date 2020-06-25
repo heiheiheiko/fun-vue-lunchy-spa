@@ -38,6 +38,29 @@
         Register
       </button>
 
+      <FormulateForm v-model="values" @submit="submitted">
+  <h2 class="text-2xl mb-2">Password reset</h2>
+  <FormulateInput
+    type="password"
+    name="password"
+    label="New password"
+    help="Pick a new password, must have at least 1 number."
+    validation="^required|min:5,length|matches:/[0-9]/"
+    :validation-messages="{
+      matches: 'Password must contain at least 1 number.'
+    }"
+  />
+  <FormulateInput
+    type="password"
+    name="password_confirm"
+    label="Confirm password"
+    help="Just re-type what you entered above"
+    validation="^required|confirm"
+    validation-name="Password confirmation"
+  />
+  <FormulateInput type="submit"/>
+</FormulateForm>
+
       <ul>
         <li
           v-for="(error, index) in errors"
