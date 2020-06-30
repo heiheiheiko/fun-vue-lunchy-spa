@@ -1,17 +1,6 @@
 <template>
   <LayoutDefaultDynamic>
-    <div class="home">
-      <a
-        href="#"
-        @click="currentUserLogout"
-      > logout </a>
-      <router-link to="/login">
-        Login
-      </router-link>
-      <router-link to="/register">
-        Register
-      </router-link>
-    </div>
+    no content
   </LayoutDefaultDynamic>
 </template>
 
@@ -20,7 +9,7 @@ import { mapActions } from 'vuex';
 import LayoutDefaultDynamic from '@/layouts/LayoutDefaultDynamic';
 
 export default {
-  name: 'Home',
+  name: 'HomePage',
   components: {
     LayoutDefaultDynamic,
   },

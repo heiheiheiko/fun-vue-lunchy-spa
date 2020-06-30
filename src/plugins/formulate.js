@@ -4,7 +4,7 @@ import VueFormulate from '@braid/vue-formulate';
 Vue.use(VueFormulate, {
   classes: {
     outer: 'mb-4',
-    input(context: any) {
+    input(context) {
       switch (context.classification) {
         case 'button':
           return 'button --primary';

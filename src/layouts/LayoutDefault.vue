@@ -1,18 +1,21 @@
 <template>
-  <div class="LayoutDefault">
-    <nav class="LayoutDefault__nav">
-      <router-link to="/">
-        Home
-      </router-link> |
-      <router-link to="/about">
-        About
-      </router-link>
-    </nav>
-    <main class="LayoutDefault__main">
+  <div>
+    <AppNavigation />
+    <main>
       <slot />
     </main>
-    <footer class="LayoutDefault__footer">
-      &copy; Awesome Company
-    </footer>
+    <AppFooter />
   </div>
 </template>
+
+<script>
+import AppNavigation from '@/layouts/AppNavigation.vue';
+import AppFooter from '@/layouts/AppFooter.vue';
+
+export default {
+  components: {
+    AppNavigation,
+    AppFooter,
+  },
+};
+</script>

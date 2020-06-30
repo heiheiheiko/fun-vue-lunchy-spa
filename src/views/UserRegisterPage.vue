@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <LayoutContentCenterDynamic>
     <form @submit.prevent="register">
       <label for="username">
         username:
@@ -79,13 +79,18 @@
         Already have an account? Login.
       </router-link>
     </form>
-  </div>
+  </LayoutContentCenterDynamic>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
+import LayoutContentCenterDynamic from '@/layouts/LayoutContentCenterDynamic';
 
 export default {
+  name: 'UserRegisterPage',
+  components: {
+    LayoutContentCenterDynamic,
+  },
   data() {
     return {
       username: '',
