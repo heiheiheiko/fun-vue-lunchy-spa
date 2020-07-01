@@ -4,17 +4,22 @@ import { authApi, usersApi } from '@/configs/apis';
 export default {
   accessTokenFetch({ commit }, credentials) {
     const { username, password } = credentials;
-
-    return Vue.axios
-      .post(authApi, {
-        username,
-        password,
-        grantType: 'password',
-      })
-      .then(({ data }) => {
-        commit('SET_AUTH_DATA', data);
-      })
-      .catch((error) => console.log(error));
+    return new Promise((resolve, reject) => {
+      Vue.axios
+        .post(authApi, {
+          username,
+          password,
+          grantType: 'password',
+        })
+        .then(({ data }) => {
+          commit('SET_AUTH_DATA', data);
+          resolve(data);
+        })
+        .catch((error) => {
+          console.log(error);
+          reject(error);
+        });
+    });
   },
   currentUserFetch({ commit }) {
     return Vue.axios
@@ -33,9 +38,17 @@ export default {
       });
   },
   userLogin({ dispatch }, credentials) {
-    return dispatch('accessTokenFetch', credentials)
-      .then(() => { dispatch('currentUserFetch'); })
-      .catch((error) => console.log(error));
+    return new Promise((resolve, reject) => {
+      dispatch('accessTokenFetch', credentials)
+        .then((accessTokenData) => {
+          dispatch('currentUserFetch');
+          resolve(accessTokenData);
+        })
+        .catch((error) => {
+          console.log(error);
+          reject(error);
+        });
+    });
   },
   currentUserLogout({ commit }) {
     commit('LOGOUT');
