@@ -1,16 +1,11 @@
 import Vue from 'vue';
-import { authApi, usersApi } from '@/configs/apis';
+import { usersApi } from '@/configs/apis';
 
 export default {
   accessTokenFetch({ commit }, credentials) {
-    const { username, password } = credentials;
     return new Promise((resolve, reject) => {
       Vue.axios
-        .post(authApi, {
-          username,
-          password,
-          grantType: 'password',
-        })
+        .post(`${usersApi}/authenticate`, credentials)
         .then(({ data }) => {
           commit('SET_AUTH_DATA', data);
           resolve(data);

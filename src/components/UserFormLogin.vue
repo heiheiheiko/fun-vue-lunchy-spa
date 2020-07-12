@@ -7,9 +7,9 @@
         Login
       </h2>
       <FormulateInput
-        v-model="username"
-        name="username"
-        label="Username"
+        v-model="email"
+        name="email"
+        label="Email"
         validation="^required"
       />
       <FormulateInput
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       errorMessage: '',
     };
@@ -48,12 +48,14 @@ export default {
     ...mapActions('users', ['userLogin']),
     onSubmit() {
       this.userLogin({
-        username: this.username,
-        password: this.password,
+        user: {
+          email: this.email,
+          password: this.password,
+        },
       }).then(() => {
         this.$router.push({ name: 'home' });
       }).catch(() => {
-        this.errorMessage = 'Username or password is wrong.';
+        this.errorMessage = 'email or password is wrong.';
       });
     },
   },

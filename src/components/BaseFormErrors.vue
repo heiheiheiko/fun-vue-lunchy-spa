@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     fieldErrorMessage(key, errors) {
-      return `${key.charAt(0).toUpperCase() + key.slice(1)} ${errors.join(',')}`;
+      return `${key.charAt(0).toUpperCase() + key.slice(1)}: ${errors.join(',')}`;
     },
   },
 };

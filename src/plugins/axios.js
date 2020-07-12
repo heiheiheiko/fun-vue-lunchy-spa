@@ -24,7 +24,7 @@ localAxios.interceptors.request.use(
 
     const authData = JSON.parse(authDataString);
     config.headers = {
-      Authorization: `Bearer ${authData.access_token}`,
+      Authorization: `Bearer ${authData.token}`,
     };
 
     return config;
@@ -34,7 +34,7 @@ localAxios.interceptors.request.use(
 
 // Add a response interceptor
 localAxios.interceptors.response.use(
-  (response) => response, // Do something with response data
+  (response) => response.data, // Do something with response data
   (error) => Promise.reject(error), // Do something with response error
 );
 
