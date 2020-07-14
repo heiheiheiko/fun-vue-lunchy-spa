@@ -29,7 +29,7 @@ export default {
       .post(usersApi, { user: credentials })
       .then(({ data }) => {
         commit('SET_CURRENT_USER', data);
-        dispatch('accessTokenFetch', credentials);
+        dispatch('accessTokenFetch', { user: credentials });
       });
   },
   userLogin({ dispatch }, credentials) {
