@@ -5,12 +5,8 @@ import Vue from 'vue';
 import axios from 'axios';
 
 // Full config:  https://github.com/axios/axios#request-config
-// axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
 const config = {
-  // baseURL: process.env.baseURL || process.env.apiUrl || ""
+  baseURL: 'http://localhost:8000/api/' || '',
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };
@@ -57,4 +53,4 @@ Plugin.install = function init(Vue) {
 
 Vue.use(Plugin);
 
-export default Plugin;
+export default localAxios;
