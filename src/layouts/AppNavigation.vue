@@ -43,7 +43,7 @@
         </router-link>
       </div>
       <div>
-        <template v-if="!loggedIn">
+        <template v-if="!currentUser">
           <router-link
             to="/login"
             class="inline-block text-sm px-4 py-2 leading-none border rounded text-white
@@ -63,7 +63,7 @@
           </router-link>
         </template>
         <span
-          v-if="loggedIn"
+          v-if="!!currentUser"
           class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
         >
           {{ currentUser.username }}
@@ -75,11 +75,13 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
+import User from '@/models/User';
 
 export default {
   computed: {
-    ...mapGetters('users', ['loggedIn']),
-    ...mapState('users', ['currentUser']),
+    currentUser() {
+      return User.current();
+    },
   },
 };
 </script>

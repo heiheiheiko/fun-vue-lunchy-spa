@@ -6,6 +6,7 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import './assets/styles/main.scss';
+import User from './models/User';
 
 Vue.config.productionTip = false;
 
@@ -21,7 +22,7 @@ new Vue({
     const currentUserString = localStorage.getItem('currentUser');
     if (currentUserString) {
       const currentUserData = JSON.parse(currentUserString);
-      this.$store.commit('users/SET_CURRENT_USER', currentUserData);
+      User.insert({ data: currentUserData });
     }
 
     (Vue as any).axios.interceptors.response.use(

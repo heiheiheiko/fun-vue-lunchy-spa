@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import Order from '@/models/Order';
-import User from '@/models/User';
 
 export default {
   name: 'App',
@@ -14,9 +12,6 @@ export default {
     return {
       layout: 'div',
     };
-  },
-  created() {
-    Order.api().index();
   },
 };
 </script>

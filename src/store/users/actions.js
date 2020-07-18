@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { usersApi } from '@/configs/apis';
+import User from '@/models/User';
 
 export default {
   accessTokenFetch({ commit }, credentials) {
@@ -16,19 +17,11 @@ export default {
         });
     });
   },
-  currentUserFetch({ commit }) {
-    return Vue.axios
-      .get(`${usersApi}/current`)
-      .then(({ data }) => {
-        commit('SET_CURRENT_USER', data);
-      })
-      .catch((error) => console.log(error));
-  },
-  userRegister({ commit, dispatch }, credentials) {
+  userRegister({ dispatch }, credentials) {
     return Vue.axios
       .post(usersApi, { user: credentials })
       .then(({ data }) => {
-        commit('SET_CURRENT_USER', data);
+        User.insert({ data: { ...data, isCurrentUser: true } });
         dispatch('accessTokenFetch', { user: credentials });
       });
   },
@@ -36,7 +29,7 @@ export default {
     return new Promise((resolve, reject) => {
       dispatch('accessTokenFetch', credentials)
         .then((accessTokenData) => {
-          dispatch('currentUserFetch');
+          User.api().current();
           resolve(accessTokenData);
         })
         .catch((error) => {
